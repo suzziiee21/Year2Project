@@ -34,7 +34,7 @@ void loop() {
 
    String color = "";
 
-  // YELLOW: Red is high, and Blue is clearly lower than Green
+  // YELLOW: Red is high, and Blue is lower than Green
   if (R > 105 && G > 70 && B < 60 && (G - B > 15)) {
     color = "Yellow";
     miservo2.write(0);
@@ -56,7 +56,7 @@ void loop() {
     delay(200); 
   }
 
-  // BLUE bin: your "blue" reads as Green highest, Blue second, Red lowest
+  // BLUE bin: "blue" reads as Green highest, Blue second, Red lowest
   else if (G > 95 && B > 75 && R < 70 && (G - R) > 40) {
     color = "Blue";
     miservo2.write(0);
