@@ -32,31 +32,10 @@ void loop() {
   int G = int(green);
   int B = int(blue);
 
-  String color = "";
+   String color = "";
 
-  if ((R - G > 65) && (R - B > 45)) {
-    color = "Red";
-    miservo2.write(0);
-    miservo.write(170);      
-    miservo2.write(180); 
-    delay(500);
-    miservo2.write(0);
-    delay(200); 
-      
-  }
-
-  else if ((B - G > 100) && (B - R > 150)) {
-    color = "Blue";
-    miservo2.write(0);
-    miservo.write(90);     
-    miservo2.write(180);
-    delay(500);
-    miservo2.write(0);
-    delay(200);
-    
-  }
-
-  else if ((R - B > 50) && (G - B > 35)) {
+  // YELLOW: Red is high, and Blue is clearly lower than Green
+  if (R > 105 && G > 70 && B < 60 && (G - B > 15)) {
     color = "Yellow";
     miservo2.write(0);
     miservo.write(0);      
@@ -64,9 +43,29 @@ void loop() {
     delay(500);
     miservo2.write(0);
     delay(200);
-   
   }
- 
+
+  // RED: Red is high, and Green ~ Blue (very similar)
+  else if (R > 115 && G < 80 && B < 80 && abs(G - B) <= 10) {
+    color = "Red";
+    miservo2.write(0);
+    miservo.write(170);      
+    miservo2.write(180); 
+    delay(500);
+    miservo2.write(0);
+    delay(200); 
+  }
+
+  // BLUE bin: your "blue" reads as Green highest, Blue second, Red lowest
+  else if (G > 95 && B > 75 && R < 70 && (G - R) > 40) {
+    color = "Blue";
+    miservo2.write(0);
+    miservo.write(90);     
+    miservo2.write(180);
+    delay(500);
+    miservo2.write(0);
+    delay(200);
+  }
 
   Serial.print("R: "); Serial.print(R);
   Serial.print("   G: "); Serial.print(G);
@@ -76,3 +75,4 @@ void loop() {
 
   delay(300);
 }
+
